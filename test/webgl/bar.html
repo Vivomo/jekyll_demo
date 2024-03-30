@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bar</title>
+    <link rel="stylesheet" href="./style/common.css">
+</head>
+<body>
+
+<script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.152.2/examples/jsm/"
+      }
+    }
+</script>
+<script type="module">
+  import initControls from './lib/controls.js';
+  // import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/0.152.2/three.module.min.js';
+  import * as THREE from 'three';
+  import { createMultiMaterialObject } from 'three/addons/utils/SceneUtils.js';
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  const glassGeometry = new THREE.CylinderGeometry(1, 0.8, 2, 8); // 参数：顶部半径、底部半径、高度、分段数
+
+  const glassMaterial = new THREE.MeshPhongMaterial({
+    color: 0xffffff, // 玻璃的颜色
+    transparent: true, // 开启透明度
+    opacity: 0.2, // 设置透明度（0-1）
+    reflectivity: 0.5, // 反射率
+    refractionRatio: 0.5 // 折射率
+  });
+
+
+  const plane = new THREE.BoxGeometry(1, 1, 1, 1, 1, 1);
+  const lambert = new THREE.MeshLambertMaterial({ color: 0x00cc00 });
+  const planeMesh = new THREE.Mesh(plane, lambert);
+  scene.add(planeMesh);
+
+  // const glassMesh = new THREE.Mesh(glassGeometry, glassMaterial);
+  // scene.add(glassMesh);
+  const mesh = {
+    pointer: createMultiMaterialObject(glassGeometry, [
+      // lambert,
+      glassMaterial
+      // basic
+    ])
+  }
+
+  // 添加到场景里
+  scene.add(mesh.pointer);
+
+
+  const light = new THREE.DirectionalLight(0xffffff, 0.5);
+  light.position.set(1, 1, 1);
+  scene.add(light);
+
+  camera.position.z = 5;
+  initControls(glassGeometry, camera, mesh, scene)
+
+  function animate() {
+    requestAnimationFrame(animate);
+    mesh.pointer.rotation.x += 0.01;
+    // 更新其他动画或交互效果
+    renderer.render(scene, camera);
+  }
+  animate();
+
+</script>
+</body>
+</html>

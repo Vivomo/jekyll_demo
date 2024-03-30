@@ -44,10 +44,23 @@
   const lambert = new THREE.MeshLambertMaterial({ color: 0xff0000 })
   const basic = new THREE.MeshBasicMaterial({ wireframe: true })
 
+  const glassMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff, // 玻璃颜色
+    transparent: true, // 设置为透明
+    opacity: 0.5, // 设置透明度
+    roughness: 0, // 光滑度
+    metalness: 0, // 金属度
+    envMapIntensity: 1, // 环境贴图强度
+    transmission: 0.95, // 折射度，表示光线经过材料时的衰减程度
+    clearcoat: 1, // 清漆层
+    clearcoatRoughness: 0.1, // 清漆层的光滑度
+  });
+
   const mesh = {
     pointer: createMultiMaterialObject(geometry, [
-      lambert,
-      basic
+      // lambert,
+      glassMaterial
+      // basic
     ])
   }
 
