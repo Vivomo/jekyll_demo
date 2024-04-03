@@ -17,8 +17,8 @@ dependencies:
 
 devDependencies:
   vite:
-    specifier: ^5.1.0
-    version: 5.1.1(sass@1.70.0)
+    specifier: ^5.1.7
+    version: 5.1.7(sass@1.70.0)
 
 packages:
 
@@ -1044,8 +1044,8 @@ packages:
       qs: 6.11.2
     dev: false
 
-  /vite@5.1.1(sass@1.70.0):
-    resolution: {integrity: sha512-wclpAgY3F1tR7t9LL5CcHC41YPkQIpKUGeIuT8MdNwNZr6OqOTLs7JX5vIHAtzqLWXts0T+GDrh9pN2arneKqg==}
+  /vite@5.1.7(sass@1.70.0):
+    resolution: {integrity: sha512-sgnEEFTZYMui/sTlH1/XEnVNHMujOahPLGMxn1+5sIT45Xjng1Ec1K78jRP15dSmVgg5WBin9yO81j3o9OxofA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
